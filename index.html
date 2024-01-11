@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+  <link rel="shortcut icon" href="https://img.icons8.com/ios-filled/250/FFFFFF/apple-calculator.png" type="image/x-icon">
+  <meta name="description" content="A calculator app!">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200 p-10">
+    <div class="bg-white p-4 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold text-center">Calculator</h1>
+        <h1 class="text-xs font-bold mb-4 text-center">By: <a href="https://github.com/seifsamehtolba" class="text-purple-500">seifsamehtolba</a></h1>
+        <div class="bg-gray-100 p-2 rounded-lg">
+            <input id="display" class="w-full bg-gray-100 text-right font-bold text-xl py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline" type="text" readonly>
+        </div>
+        <div class="grid grid-cols-4 gap-2 mt-4">
+            <button id="C" class="w-full py-2 px-4 bg-blue-500 rounded-lg text-white">C</button>
+            <button id="seven" class="w-full py-2 px-4 bg-gray-200 rounded-lg">7</button>
+            <button id="eight" class="w-full py-2 px-4 bg-gray-200 rounded-lg">8</button>
+            <button id="nine" class="w-full py-2 px-4 bg-gray-200 rounded-lg">9</button>
+            <button id="divide" class="w-full py-2 px-4 bg-yellow-500 rounded-lg text-white">÷</button>
+
+            <button id="four" class="w-full py-2 px-4 bg-gray-200 rounded-lg">4</button>
+            <button id="five" class="w-full py-2 px-4 bg-gray-200 rounded-lg">5</button>
+            <button id="six" class="w-full py-2 px-4 bg-gray-200 rounded-lg">6</button>
+            <button id="multiply" class="w-full py-2 px-4 bg-yellow-500 rounded-lg text-white">x</button>
+
+            <button id="one" class="w-full py-2 px-4 bg-gray-200 rounded-lg">1</button>
+            <button id="two" class="w-full py-2 px-4 bg-gray-200 rounded-lg">2</button>
+            <button id="three" class="w-full py-2 px-4 bg-gray-200 rounded-lg">3</button>
+            <button id="subtract" class="w-full py-2 px-4 bg-yellow-500 rounded-lg text-white">-</button>
+
+            <button id="zero" class="w-full py-2 px-4 bg-gray-200 rounded-lg">0</button>
+            <button id="decimal" class="w-full py-2 px-4 bg-gray-200 rounded-lg">.</button>
+            <button id="equals" class="w-full py-2 px-4 bg-blue-500 rounded-lg text-white">=</button>
+            <button id="add" class="w-full py-2 px-4 bg-yellow-500 rounded-lg text-white">+</button>
+        </div>
+    </div>
+
+    <script>
+let operation = '';
+let operand1 = 0;
+let operand2 = null;
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (button.id === 'add' || button.id === 'subtract' || button.id === 'multiply' || button.id === 'divide') {
+            operation = button.id;
+            operand1 = parseFloat(document.getElementById('display').value);
+            operand2 = null;
+            document.getElementById('display').value = '';
+        } else if (button.id === 'equals') {
+            operand2 = parseFloat(document.getElementById('display').value);
+            switch (operation) {
+                case 'add':
+                    document.getElementById('display').value = operand1 + operand2;
+                    break;
+                case 'subtract':
+                    document.getElementById('display').value = operand1 - operand2;
+                    break;
+                case 'multiply':
+                    document.getElementById('display').value = operand1 * operand2;
+                    break;
+                case 'divide':
+                    document.getElementById('display').value = operand1 / operand2;
+                    break;
+            }
+        } else if (button.id === 'C') {
+            document.getElementById('display').value = '';
+            operation = '';
+            operand1 = 0;
+            operand2 = null;
+        } else {
+            document.getElementById('display').value += button.textContent;
+        }
+    });
+});
+    </script>
+</body>
+</html>
